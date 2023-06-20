@@ -14,8 +14,7 @@ mkdir -p /opt/my_containers/collectd_client/etc
 cp docker-compose.yml /opt/my_containers/collectd_client/
 ```
 
-3. Setup collectd config in /opt/my_containers/collectd_client/etc directory
-See provided `client.conf.example` and `custom_types.db.example` files if you need inspiration.
+3. Setup collectd config in /opt/my_containers/collectd_client/etc directory. See provided `client.conf.example` and `custom_types.db.example` files if you need inspiration.
 
 4. Run docker compose
 ```bash
