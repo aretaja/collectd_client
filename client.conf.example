@@ -1,0 +1,57 @@
+Hostname        "collector"
+TypesDB         "/usr/share/collectd/types.db" "/home/collectd/etc/custom_types.db"
+Interval        60
+ReadThreads     5
+WriteThreads    5
+MaxReadInterval 3600
+
+LoadPlugin "logfile"
+<Plugin "logfile">
+    LogLevel "info"
+    File "stdout"
+    Timestamp false
+</Plugin>
+
+LoadPlugin "network"
+<Plugin "network">
+    <Server "10.1.1.254">
+       SecurityLevel "None"
+    </Server>
+</Plugin>
+
+LoadPlugin "snmp"
+<Plugin "snmp">
+    <Data "std_interface">
+        Type "std_interface"
+        Table true
+        Values ".1.3.6.1.2.1.2.2.1.10" ".1.3.6.1.2.1.2.2.1.16" "1.3.6.1.2.1.2.2.1.14" "1.3.6.1.2.1.2.2.1.20" ".1.3.6.1.2.1.2.2.1.11" ".1.3.6.1.2.1.2.2.1.17" "1.3.6.1.2.1.2.2.1.8"
+    </Data>
+    <Data "hc_std_interface">
+        Type "hc_std_interface"
+        Table true
+        Values "1.3.6.1.2.1.31.1.1.1.6" "1.3.6.1.2.1.31.1.1.1.10" "1.3.6.1.2.1.2.2.1.14" "1.3.6.1.2.1.2.2.1.20" "1.3.6.1.2.1.31.1.1.1.7" "1.3.6.1.2.1.31.1.1.1.11" "1.3.6.1.2.1.2.2.1.8" "1.3.6.1.2.1.31.1.1.1.8" "1.3.6.1.2.1.31.1.1.1.12" "1.3.6.1.2.1.31.1.1.1.9" "1.3.6.1.2.1.31.1.1.1.13"
+    </Data>
+    <Host "ALY0B1-AR-1">
+        Address "10.1.1.1"
+        Collect "hc_std_interface"
+        Interval 60
+        Timeout 4
+        Retries 1
+        Version 3
+        SecurityLevel "authPriv"
+        Username "user"
+        AuthProtocol "MD5"
+        AuthPassphrase "pass123"
+        PrivacyProtocol "DES"
+        PrivacyPassphrase "pass321"
+    </Host>
+    <Host "host-2">
+        Address "10.1.1.2"
+        Collect "hc_std_interface"
+        Interval 60
+        Timeout 4
+        Retries 1
+        Version 2
+        Community "public"
+    </Host>
+</Plugin>
